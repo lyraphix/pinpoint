@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import mapboxgl from 'mapbox-gl'; 
 import Tabs from './components/Tabs';
 import Map from './components/Map';
+import EventList from './EventList';
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
 export default function App() {
   const [lng, setLng] = useState(-87.57);
@@ -25,6 +29,38 @@ export default function App() {
     }));
   };
 
+
+  const eventsData = [
+    {
+      tagName: 'Tag Name',
+      events: [
+        { title: 'Event Title', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }, 
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Tag Name',
+      events: [
+        { title: 'Event Title', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }, 
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    
+  ];
   return (
     <div className="app-container">
       <div className="sidebar">
@@ -38,6 +74,11 @@ export default function App() {
         tabsStatus={tabsStatus}
       />
       <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} />
+      <div>
+        {eventsData.map((list, index) => (
+          <EventList key={index} tagName={list.tagName} events={list.events} />
+        ))}
+      </div>
     </div>
   );
 }
