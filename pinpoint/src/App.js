@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import EventList from './EventList';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -45,6 +46,38 @@ export default function App() {
         .addTo(map.current);
     });
   }, []);
+  
+  const eventsData = [
+    {
+      tagName: 'Tag Name',
+      events: [
+        { title: 'Event Title', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }, 
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Tag Name',
+      events: [
+        { title: 'Event Title', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }, 
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    
+  ];
 
   return (
     <div>
@@ -52,6 +85,11 @@ export default function App() {
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
       <div ref={mapContainer} className="map-container" />
+      <div>
+      {eventsData.map((list, index) => (
+        <EventList key={index} tagName={list.tagName} events={list.events} />
+      ))}
+    </div>
     </div>
   );
 }
