@@ -1,3 +1,17 @@
+
+.newPostModal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha (0.5) for the darkness level */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+}
+
 /* Modal general styles */
 .newpostmodal-container {
     /* Other styles */

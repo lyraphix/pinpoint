@@ -6,7 +6,9 @@ import PinDetails from './components/PinDetails';
 import ActionButton from './components/ActionButton.js';
 import NewPostModal from './components/NewPostModal/NewPostModel';
 import TabsButton from './components/TabsButton';
+/* No longer used import
 import ImageUploader from './ImageUploader';
+*/
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from './components/Login/Login';
 
@@ -17,9 +19,11 @@ export default function App() {
   const [lat, setLat] = useState(36.1430);
   const [zoom, setZoom] = useState(15.11);
   const [tabsStatus, setTabsStatus] = useState({
-    'Events': true,
-    'Locations': true,
-    'Details': true
+    'Campus Alerts': true,
+    'Campus Issues': true,
+    'Campus Events': true,
+    'Help Needed': true,
+    'Lost & Found': true
   });
   const [isModalOpen, setModalOpen] = useState(false);
   const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
@@ -155,7 +159,6 @@ export default function App() {
 
       {isNewPostModalOpen && <NewPostModal onClose={() => setNewPostModalOpen(false)} onSubmit={handleNewPost} />}
 
-      <ImageUploader />
     </div>
   );
 }
