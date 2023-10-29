@@ -56,57 +56,46 @@ export default function App() {
     {
       tagName: 'Campus Alerts',
       events: [
-        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
-        { title: 'Event Title', upvotes: 100  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }
+        { title: 'Fire on FGH 3rd floor', upvotes: 12 },
+        { title: 'Flood at Moore', upvotes: 18  },
+        { title: 'Suspected bank robber is...', upvotes: 1000  }, 
+
       ]
     },
     {
       tagName: 'Campus Issues',
       events: [
-        { title: 'Event Title', upvotes: 1 },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }, 
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }
+        { title: 'Kirkland construction', upvotes: 1562 },
+        { title: 'Construction near Highland', upvotes: 21  },
+        { title: 'First floor FGH flood', upvotes: 25  }, 
+        { title: 'Wet floor near 2301', upvotes: 89  },
+        { title: 'All 2nd floor Furman classro...', upvotes: 5  },
+        { title: 'EBI floor 2 blasting Zwomp Z...', upvotes: 9  },
+        { title: 'Rand is out of all protein', upvotes: 6316  },
+        { title: 'Rand is closed 2 hrs early', upvotes: 75  },
+
       ]
     },
     {
       tagName: 'Campus Events',
       events: [
-        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
-        { title: 'Event Title', upvotes: 100  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }
+        { title: 'Math Club meets 7 pm Thurs', upvotes: 23 },
+        { title: 'Farmer\'s Market outside R...', upvotes: 8  },
+        { title: 'Soccer on Alumni', upvotes: 752  }, 
+        { title: 'Cornhole tournament 3pm', upvotes: 100  },
+        { title: 'Food trucks on Alumni Lawn', upvotes: 828  },
+        { title: 'Flulapalooza 8am-6pm today!', upvotes: 14  },
+        { title: 'Free Chik-Fil-A', upvotes: 582  },
+        { title: 'Soccer game vs TN today', upvotes: 711  },
+        { title: 'Climbing team tryouts today 5pm', upvotes: 4  }
       ]
     },
     {
       tagName: 'Help Needed',
       events: [
-        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
-        { title: 'Event Title', upvotes: 100  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }
+        { title: '(on crutches) Sax carrying', upvotes: 2 },
+        { title: 'Left laptop in Central 6 room', upvotes: 5 },
+
       ]
     },
     
