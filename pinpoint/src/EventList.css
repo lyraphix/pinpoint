@@ -8,10 +8,9 @@
   align-items: center;
   margin-bottom: 10px;
   font-size: calc(15px + 2vmin);
-  color: white;
+  color: #3a3a3a;
   font-family: 'Lato';
   padding: 5px;
-  background-color: #F9FAF3;
 }
 
 .tag button {
