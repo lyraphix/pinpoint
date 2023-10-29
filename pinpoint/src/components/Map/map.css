@@ -1,0 +1,8 @@
+.map-container {
+    width: 100%;
+    height: 100vh; /* full vertical height */
+    position: relative;
+  }
+  
+  /* If you want some additional styling, e.g., border, padding, or any other, you can add them to this class. */
+  

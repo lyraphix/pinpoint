@@ -1,26 +1,33 @@
 import React, { useState } from 'react';
-import mapboxgl from 'mapbox-gl'; 
-import Tabs from './components/Tabs';
+import mapboxgl from 'mapbox-gl';
 import Map from './components/Map';
 import Modal from './components/Modal';
 import PinDetails from './components/PinDetails';
-import EventList from './EventList';
+import ActionButton from './components/ActionButton.js';
+import NewPostModal from './components/NewPostModal/NewPostModel';
+import TabsButton from './components/TabsButton';
+import ImageUploader from './ImageUploader';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from './components/Login/Login';
-import ImageUploader from './ImageUploader';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
 export default function App() {
-  const [lng, setLng] = useState(-87.57);
-  const [lat, setLat] = useState(41.91);
-  const [zoom, setZoom] = useState(8.6);
+  const [lng, setLng] = useState(-86.8038);
+  const [lat, setLat] = useState(36.1430);
+  const [zoom, setZoom] = useState(15.11);
   const [tabsStatus, setTabsStatus] = useState({
     'Events': true,
     'Locations': true,
     'Details': true
   });
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  if (!isAuthenticated) {
+    return <LoginPage/>
+  }
   const dummyPinsData = [
     {
       image: 'https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y',
@@ -28,15 +35,9 @@ export default function App() {
       likes: 12,
       class: 'EventImage',
       id: 'eventimage1'
-    },
+    }
     // ... other pins
   ];
-
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
-
-  if (!isAuthenticated) {
-    return <LoginPage/>
-  }
 
   const handleMapMove = (newLng, newLat, newZoom) => {
     setLng(newLng);
@@ -44,13 +45,32 @@ export default function App() {
     setZoom(newZoom);
   };
 
-  const toggleTab = (tab) => {
-    setTabsStatus(prev => ({
-      ...prev,
-      [tab]: !prev[tab]
+  const handleTabChange = (tab) => {
+    setTabsStatus(prevStatus => ({
+      ...prevStatus,
+      [tab]: !prevStatus[tab]
     }));
   };
-
+  
+  const handleNewPost = (postDetails) => {
+    const userId = "currentUserId"; 
+    const location = navigator.geolocation.getCurrentPosition(position => ({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    }));
+    const currentTime = new Date();
+    const postObject = {
+      userId,
+      ...postDetails,
+      location,
+      time: currentTime,
+      type: "Point",
+      likes: 0,
+      popularity: 50
+    };
+    console.log(postObject);
+    setNewPostModalOpen(false);
+  };
 
   const eventsData = [
     {
@@ -112,19 +132,20 @@ export default function App() {
       <div className="sidebar">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
-      <Map 
-        initialLng={lng} 
-        initialLat={lat} 
-        initialZoom={zoom} 
-        onMapMove={handleMapMove} 
-        tabsStatus={tabsStatus}
-      />
-      <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} />
-      <div>
-        {eventsData.map((list, index) => (
-          <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
-        ))}
+      <div className="mapContainer">
+        <Map 
+          initialLng={lng}
+          initialLat={lat}
+          initialZoom={zoom}
+          onMapMove={handleMapMove}
+          tabsStatus={tabsStatus}
+        />
+        <TabsButton onTabChange={handleTabChange} />
+        <ActionButton onClick={() => setNewPostModalOpen(true)} />
       </div>
+
+      {isNewPostModalOpen && <NewPostModal onClose={() => setNewPostModalOpen(false)} onSubmit={handleNewPost} />}
+
       <ImageUploader />
     </div>
   );
