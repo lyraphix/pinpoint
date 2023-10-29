@@ -79,7 +79,11 @@
   /* Gradient overlay */
   /*background: linear-gradient(to top, rgba(0, 40, 0, 1) 0%, rgba(0, 50, 0, 0) 23%);*/
   background: #2e8b57;
-
+  background-image: url("https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y");
+  background-size: cover; /* This property scales the background image to cover the entire element */
+  background-position: center; /* This property centers the background image within the element */
+  background-repeat: no-repeat; /* This property ensures the background image is not repeated */
+  width: 100%;
   /* Enlarge the image on hover */
   transition: transform 0.25s ease;
 }
@@ -94,7 +98,7 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: "Lato";
   position: absolute;
   font-style: italic;
   font-weight: bold;
@@ -109,7 +113,7 @@ p {
   display: flex; /* Used for positioning the heart icon and number */
   gap: 5px; /* Space between heart icon and number */
   color: white; /* Font color */
-  font-family: "Roboto", sans-serif; /* For consistency */
+  font-family: "Lato"; /* For consistency */
   position: absolute;
   font-style: normal;
   font-weight: bold;
