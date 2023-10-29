@@ -8,6 +8,7 @@ import EventList from './EventList';
 import ActionButton from './components/ActionButton.js';
 import NewPostModal from './components/NewPostModal/NewPostModel';
 import TabsButton from './components/TabsButton';
+import ImageUploader from './ImageUploader';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -26,9 +27,11 @@ export default function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const dummyPinsData = [
     {
-      image: 'url_of_first_image',
-      title: 'Title of First Pin',
-      likes: 123
+      image: 'https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y',
+      title: 'Fireworks',
+      likes: 12,
+      class: 'EventImage',
+      id: 'eventimage1'
     },
     // ... other pins
   ];
@@ -85,7 +88,7 @@ export default function App() {
 
   const eventsData = [
     {
-      tagName: 'Tag Name',
+      tagName: 'Campus Alerts',
       events: [
         { title: 'Event Titleeeeeeeeee', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },
@@ -99,12 +102,40 @@ export default function App() {
       ]
     },
     {
-      tagName: 'Tag Name',
+      tagName: 'Campus Issues',
       events: [
         { title: 'Event Title', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  }, 
         { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Campus Events',
+      events: [
+        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
+        { title: 'Event Title', upvotes: 100  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Help Needed',
+      events: [
+        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
+        { title: 'Event Title', upvotes: 100  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
@@ -123,28 +154,27 @@ export default function App() {
           ))}
         </div>
       </Modal>
-      {/* <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-      </div> */}
+      
       <div className="mapContainer">
         <Map 
           initialLng={lng} 
           initialLat={lat} 
           initialZoom={zoom} 
           onMapMove={handleMapMove} 
-          tabsStatus={tabsStatus}  // Passing the updated state to the Map component
+          tabsStatus={tabsStatus}
         />
         <TabsButton onTabChange={handleTabChange} />
-
         <ActionButton onClick={() => setNewPostModalOpen(true)} />
       </div>
-      {/* <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} /> */}
-      {/* <div>
+      
+      <div>
         {eventsData.map((list, index) => (
           <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
         ))}
-      </div> */}
+      </div>
+
       {isNewPostModalOpen && <NewPostModal onClose={() => setNewPostModalOpen(false)} onSubmit={handleNewPost} />}
+      <ImageUploader />
     </div>
   );
 }

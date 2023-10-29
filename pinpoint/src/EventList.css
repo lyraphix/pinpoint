@@ -1,11 +1,16 @@
+
 .eventList {
-  margin-bottom: 20px;
+  margin: 20px;
 }
 
 .tag {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-size: calc(15px + 2vmin);
+  color: #3a3a3a;
+  font-family: 'Lato';
+  padding: 5px;
 }
 
 .tag button {
@@ -24,17 +29,39 @@
   display: none;
 }
 
+.EventImage {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+/* Image on the box */
 .eventCard {
   position: relative;
-  min-width: 150px;
-  height: 160px;
+  min-width: 300px;
+  height: 190px;
   border: 1px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 10px 10px 10px 10px;
   transition: transform 0.3s ease;
-  border-radius: 10px; /* Added rounded corners */
+  border-radius: 60px; 
+  
+}
+/*
+.eventCard {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}*/
+.eventCard:hover {
+  transform: scale(1.05);
 }
 
 .imagePlaceholder {
@@ -47,10 +74,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px; /* Match the border-radius of the .eventCard */
+  border-radius: 60px; /* Match the border-radius of the .eventCard */
   overflow: hidden;
   /* Gradient overlay */
-  background: linear-gradient(to top, rgba(0, 40, 0, 1) 0%, rgba(0, 50, 0, 0) 23%);
+  /*background: linear-gradient(to top, rgba(0, 40, 0, 1) 0%, rgba(0, 50, 0, 0) 23%);*/
+  background: #2e8b57;
 
   /* Enlarge the image on hover */
   transition: transform 0.25s ease;
@@ -71,7 +99,7 @@ p {
   font-style: italic;
   font-weight: bold;
   bottom: -2px;
-  left: 10px;
+  left: 40px;
   max-width: calc(100% - 70px); /* Adjust this value based on your needs */
 }
 
@@ -86,7 +114,7 @@ p {
   font-style: normal;
   font-weight: bold;
   bottom: 11px;
-  right: 10px;
+  right: 40px;
 }
 
 .upvoteCount::before {
@@ -97,3 +125,4 @@ p {
 .eventCard:hover {
   z-index: 1;
 }
+
