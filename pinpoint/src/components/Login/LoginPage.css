@@ -1,5 +1,8 @@
 /* src/SignupPage.css */
 
+
+
+
 .background-container {
     display: flex;
     justify-content: center;
@@ -31,6 +34,7 @@ h1 {
     margin: 10px 0;
     font-family: "Palanquin Dark";
     color: #123605;
+    font-family: "Lato";
 }
 
 input {
