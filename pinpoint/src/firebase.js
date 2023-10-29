@@ -2,6 +2,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './index.css';
 import { initializeApp } from "firebase/app";
+import { getStorage } from 'firebase/storage';
 //import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
@@ -16,4 +17,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 //const analytics = getAnalytics(app);
+export { storage };
