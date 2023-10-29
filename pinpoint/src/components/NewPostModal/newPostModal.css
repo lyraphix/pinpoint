@@ -1,0 +1,87 @@
+/* Modal general styles */
+.newpostmodal-container {
+    /* Other styles */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;  /* Ensures the modal appears above other elements */
+}
+
+.newpostmodal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+/* Image preview and take photo button container */
+.newpostmodal-image-container {
+    margin-bottom: 20px;
+}
+
+.newpostmodal-image-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.newpostmodal-camera-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Input styles */
+.newpostmodal-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Select styles */
+.newpostmodal-select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styles */
+.newpostmodal-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.newpostmodal-submit-btn {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.newpostmodal-close-button { /* I changed the classname here for consistency with your other modals */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.newpostmodal-close-button:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
