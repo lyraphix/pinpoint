@@ -199,7 +199,13 @@ export default function App() {
         {showButton && <ScrollButton />}
         <div className="button-container">
           <div className="tabs-container">
-            <TabsButton onTabChange={handleTabChange} />
+          <TabsButton onTabChange={(tabName) => {
+              setTabsStatus(prevStatus => ({
+                ...prevStatus,
+                [tabName]: !prevStatus[tabName]
+              }));
+            }} />
+
             <ActionButton onClick={() => setNewPostModalOpen(true)} />
           </div>
           <LogoutButton className="logout-button"/>

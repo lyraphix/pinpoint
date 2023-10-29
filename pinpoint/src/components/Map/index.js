@@ -56,11 +56,13 @@ const Map = ({ initialLng, initialLat, initialZoom, onMapMove, tabsStatus, setMa
     
   
     const toggleLayerVisibility = (status) => {
-      const layerMapping = {
-        Events: 'chicago-events',
-        Alerts: 'chicago-parks',
-        Requests: 'chicago-lostnfound',
-      };
+        const layerMapping = {
+            'Campus Alerts': 'chicago-lostnfound',
+            'Campus Events': 'chicago-events',
+            'Campus Issues': 'chicago-parks',
+            // ... add other mappings as needed
+          };
+          
   
       for (const [key, layerName] of Object.entries(layerMapping)) {
         const visibility = status[key] ? 'visible' : 'none';

@@ -1,37 +1,14 @@
-/* Main Locate User Button Container */
 .locate-user-button {
     position: absolute;
-    width: 24px; /* from the "current" style */
-    height: 24px; /* from the "current" style */
-    left: 290px; /* from the "current" style */
-    top: 416px; /* from the "current" style */
-    padding: 0; /* removing the previous padding */
+    bottom: 140px;
+    right: 3%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #333;
+    color: #FFF;
     border: none;
     cursor: pointer;
-    color: #3FD74E;
-}
-
-/* Outer Ellipse (Ellipse 2) */
-.locate-user-button .outer-ellipse {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background: #3FD74E;
-    opacity: 0.3;
-    border-radius: 50%; /* to make it elliptical */
-}
-
-/* Inner Ellipse (Ellipse) */
-.locate-user-button .inner-ellipse {
-    position: absolute;
-    left: 29.17%;
-    right: 29.17%;
-    top: 29.17%;
-    bottom: 29.17%;
-    background: #3FD74E;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15);
-    border-radius: 50%; /* to make it elliptical */
+    font-size: 24px;
 }
