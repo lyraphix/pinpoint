@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Map from './components/Map';
 import Modal from './components/Modal';
@@ -17,6 +16,7 @@ import LocateUserButton from './components/LocateUserButton';
 import LogoutButton from './components/LogoutButton';
 import Tabs from "./components/Tabs"
 import EventList from "./EventList.js"
+import ScrollButton from './components/ScrollButton';
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
@@ -25,6 +25,8 @@ export default function App() {
   const [lng, setLng] = useState(-86.8038);
   const [lat, setLat] = useState(36.1430);
   const [zoom, setZoom] = useState(15.11);
+  const [showButton, setShowButton] = useState(true);
+
   const [tabsStatus, setTabsStatus] = useState({
     'Campus Alerts': true,
     'Campus Issues': true,
@@ -37,6 +39,22 @@ export default function App() {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const geolocateControlRef = useRef(null); // Add this ref
   const [mapFunctions, setMapFunctions] = useState({});
+
+  const handleScroll = () => {
+    // This will check if the user has scrolled more than 50 pixels
+    if (window.scrollY > 50) {
+      setShowButton(false);
+    }
+  };
+  
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  
+    // Cleanup: remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (!isAuthenticated) {
     return <LoginPage/>
@@ -178,8 +196,7 @@ export default function App() {
           setLng={setLng}
           setMapFunctions={setMapFunctions} 
       />
-        <TabsButton onTabChange={handleTabChange} />
-        <ActionButton onClick={() => setNewPostModalOpen(true)} />
+        {showButton && <ScrollButton />}
         <div className="button-container">
           <div className="tabs-container">
             <TabsButton onTabChange={handleTabChange} />
