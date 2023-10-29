@@ -12,7 +12,7 @@ function EventList({ tagName, events, onEventClick }) {
     <div className="eventList">
       <div className="tag">
         {tagName}
-        <button>+</button>
+        <h3> emoji lol{tagName}</h3>
       </div>
       <div className="eventsScrollable">
         {events.map((event, index) => (

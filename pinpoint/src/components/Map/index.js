@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import './map.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
 const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsStatus }) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
-
+  
   const [position, setPosition] = useState({
     lng: initialLng,
     lat: initialLat,
@@ -40,28 +41,26 @@ const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsSt
     });
 
     map.current.on('click', (event) => {
-        const features = map.current.queryRenderedFeatures(event.point, {
-          layers: ['chicago-parks'], 
-        });
-        if (!features.length) {
-          return;
-        }
-        const feature = features[0];
-        new mapboxgl.Popup({ offset: [0, -15] })
-          .setLngLat(feature.geometry.coordinates)
-          .setHTML(
-            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
-          )
-          .addTo(map.current);
-      });
-// eslint-disable-next-line 
+      event.preventDefault();
+      const layersToQuery = ['chicago-parks', 'chicago-events', 'chicago-lostnfound'];
+      const features = map.current.queryRenderedFeatures(event.point, { layers: layersToQuery });
+
+      if (!features.length) return;
+
+      const feature = features[0];
+      new mapboxgl.Popup({ offset: [0, -15] })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(`<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`)
+        .addTo(map.current);
+    });
+
   }, []);
 
   const toggleLayerVisibility = (tabsStatus) => {
     const layerMapping = {
       'Events': 'chicago-events',
-      'Locations': 'chicago-parks',
-      'Details': 'chicago-lostnfound'
+      'Alerts': 'chicago-parks',
+      'Requests': 'chicago-lostnfound'
     };
 
     Object.keys(layerMapping).forEach(tabName => {
@@ -81,9 +80,7 @@ const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsSt
 
   return <div ref={mapContainer} className="map-container" />;
 }, (prevProps, nextProps) => {
-    // Only re-render if tabsStatus values change
     return JSON.stringify(prevProps.tabsStatus) === JSON.stringify(nextProps.tabsStatus);
-  }
-);
+});
 
 export default Map;
