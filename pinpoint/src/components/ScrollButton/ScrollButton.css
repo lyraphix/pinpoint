@@ -10,9 +10,10 @@
     border-radius: 5px;
     transition: background-color 0.2s ease;
     font-size: 14px; /* Adjust as needed */
+    background-color: #4CAF50;
   }
   
   .scrollButton:hover {
-    background-color: darkgray;
+    background-color: rgb(20, 88, 22);
   }
   

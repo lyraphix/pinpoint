@@ -1,5 +1,5 @@
 .all {
-  font-family: 'Lato';
+  font-family: 'Arial';
   background-color: #3a3a3a;
 }
 
@@ -9,7 +9,7 @@ body {
 
 .App {
   text-align: center;
-  font-family: 'Lato';
+  font-family: 'Arial';
 }
 
 .App-logo {

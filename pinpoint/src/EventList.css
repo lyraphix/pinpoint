@@ -9,7 +9,7 @@
   margin-bottom: 10px;
   font-size: calc(15px + 2vmin);
   color: #3a3a3a;
-  font-family: 'Lato';
+  font-family: 'Arial';
   padding: 5px;
 }
 
@@ -98,7 +98,7 @@ p {
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
-  font-family: "Lato";
+  font-family: "Arial";
   position: absolute;
   font-style: italic;
   font-weight: bold;
@@ -113,7 +113,7 @@ p {
   display: flex; /* Used for positioning the heart icon and number */
   gap: 5px; /* Space between heart icon and number */
   color: white; /* Font color */
-  font-family: "Lato"; /* For consistency */
+  font-family: "Arial"; /* For consistency */
   position: absolute;
   font-style: normal;
   font-weight: bold;

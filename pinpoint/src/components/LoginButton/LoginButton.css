@@ -5,4 +5,5 @@ button {
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    font-family: "Arial";
 }

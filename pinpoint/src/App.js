@@ -208,7 +208,6 @@ export default function App() {
 
             <ActionButton onClick={() => setNewPostModalOpen(true)} />
           </div>
-          <LogoutButton className="logout-button"/>
         </div>
       </div>
 
@@ -220,7 +219,7 @@ export default function App() {
           <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
         ))}
       </div>
-
+      <LogoutButton className="logout-button"/>
     </div>
   );
 }
