@@ -1,86 +1,95 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import './map.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
+const MAPBOX_TOKEN = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
+const MAPBOX_STYLE = 'mapbox://styles/lyraphix/cloago2u400rc01ozd1sh3x03';
 
-const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsStatus }) => {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
+mapboxgl.accessToken = MAPBOX_TOKEN;
+
+const Map = ({ initialLng, initialLat, initialZoom, onMapMove, tabsStatus, setMapFunctions }) => {
+    const mapContainer = useRef(null);
+    const map = useRef(null);
+    const [geolocateControl, setGeolocateControl] = useState(null);
   
-  const [position, setPosition] = useState({
-    lng: initialLng,
-    lat: initialLat,
-    zoom: initialZoom,
-  });
+    useEffect(() => {
+        if (!map.current && mapContainer.current) {
+          map.current = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: MAPBOX_STYLE,
+            center: [initialLng, initialLat],
+            zoom: initialZoom,
+          });
+    
+          // Attach event listeners to the map
+          map.current.on('move', handleMapMove);
+    
+          // The following line ensures that the geolocate control is triggered once the map is loaded
+          map.current.on('load', handleMapLoad);
+        }
+    }, []);
 
-  useEffect(() => {
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/lyraphix/cloago2u400rc01ozd1sh3x03',
-      center: [position.lng, position.lat],
-      zoom: position.zoom,
-    });
-
-    map.current.on('move', () => {
-      const newLng = map.current.getCenter().lng.toFixed(4);
-      const newLat = map.current.getCenter().lat.toFixed(4);
-      const newZoom = map.current.getZoom().toFixed(2);
-
-      setPosition({
-        lng: newLng,
-        lat: newLat,
-        zoom: newZoom,
-      });
-
-      onMapMove(newLng, newLat, newZoom);
-    });
-
-    map.current.on('load', () => {
-      toggleLayerVisibility(tabsStatus);
-    });
-
-    map.current.on('click', (event) => {
-      event.preventDefault();
-      const layersToQuery = ['chicago-parks', 'chicago-events', 'chicago-lostnfound'];
-      const features = map.current.queryRenderedFeatures(event.point, { layers: layersToQuery });
-
-      if (!features.length) return;
-
-      const feature = features[0];
-      new mapboxgl.Popup({ offset: [0, -15] })
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML(`<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`)
-        .addTo(map.current);
-    });
-
-  }, []);
-
-  const toggleLayerVisibility = (tabsStatus) => {
-    const layerMapping = {
-      'Events': 'chicago-events',
-      'Alerts': 'chicago-parks',
-      'Requests': 'chicago-lostnfound'
-    };
-
-    Object.keys(layerMapping).forEach(tabName => {
-      const layerId = layerMapping[tabName];
-      const visibility = tabsStatus[tabName] ? 'visible' : 'none';
-      if (map.current.getLayer(layerId)) {
-        map.current.setLayoutProperty(layerId, 'visibility', visibility);
+    const handleMapMove = () => {
+      if (map.current) {
+        const { lng, lat } = map.current.getCenter();
+        const zoom = map.current.getZoom().toFixed(2);
+        onMapMove && onMapMove(lng, lat, zoom);
       }
-    });
-  };
-
-  useEffect(() => {
-    if (map.current && map.current.isStyleLoaded()) {
+    };
+  
+    const handleMapLoad = () => {
+        const geolocate = new mapboxgl.GeolocateControl({
+            positionOptions: { enableHighAccuracy: true },
+            trackUserLocation: true,
+            showUserLocation: true,
+        });
+    
+        if (map.current) {
+            map.current.addControl(geolocate);
+            setGeolocateControl(geolocate);
+    
+            // This line triggers the geolocation, centering the map on the user's location
+            geolocate.trigger();
+        }
+    };
+    
+  
+    const toggleLayerVisibility = (status) => {
+      const layerMapping = {
+        Events: 'chicago-events',
+        Alerts: 'chicago-parks',
+        Requests: 'chicago-lostnfound',
+      };
+  
+      for (const [key, layerName] of Object.entries(layerMapping)) {
+        const visibility = status[key] ? 'visible' : 'none';
+        if (map.current && map.current.getLayer(layerName)) {
+          map.current.setLayoutProperty(layerName, 'visibility', visibility);
+        }
+      }
+    };
+  
+    useEffect(() => {
       toggleLayerVisibility(tabsStatus);
-    }
-  }, [tabsStatus]);
-
-  return <div ref={mapContainer} className="map-container" />;
-}, (prevProps, nextProps) => {
+    }, [tabsStatus]);
+  
+    useEffect(() => {
+      if (setMapFunctions) {
+        setMapFunctions({
+          setCenter: (lng, lat) => {
+            map.current && map.current.flyTo({ center: [lng, lat] });
+          },
+          locateUser: () => {
+            geolocateControl && geolocateControl.trigger();
+          },
+        });
+      }
+    }, [setMapFunctions, geolocateControl]);
+  
+    return <div ref={mapContainer} className="map-container" />;
+  };
+  
+  export default React.memo(Map, (prevProps, nextProps) => {
     return JSON.stringify(prevProps.tabsStatus) === JSON.stringify(nextProps.tabsStatus);
-});
-
-export default Map;
+  });

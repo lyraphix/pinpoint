@@ -6,3 +6,25 @@
   
   /* If you want some additional styling, e.g., border, padding, or any other, you can add them to this class. */
   
+
+/* Styling for the user location marker */
+.mapboxgl-user-location-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+  }
+  
+  /* This targets the default inner circle of the marker; we set it to transparent since we're customizing it */
+  .mapboxgl-user-location-dot::before {
+    width: 0;
+    height: 0;
+    border: none;
+    content: "😊"; /* Smiley face emoji */
+  }
+  
