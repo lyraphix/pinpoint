@@ -58,12 +58,40 @@ export default function App() {
       ]
     },
     {
-      tagName: 'Campus Events',
+      tagName: 'Campus Issues',
       events: [
         { title: 'Event Title', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  }, 
         { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Campus Events',
+      events: [
+        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
+        { title: 'Event Title', upvotes: 100  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Title', upvotes: 1  }
+      ]
+    },
+    {
+      tagName: 'Help Needed',
+      events: [
+        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
+        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
+        { title: 'Event Title', upvotes: 100  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
