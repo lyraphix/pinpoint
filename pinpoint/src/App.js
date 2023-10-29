@@ -8,6 +8,7 @@ import EventList from './EventList';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from './components/Login/Login';
 import ImageUploader from './ImageUploader';
+import LogoutButton from './components/LogoutButton';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -130,7 +131,13 @@ export default function App() {
         onMapMove={handleMapMove} 
         tabsStatus={tabsStatus}
       />
-      <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} />
+      <div className="button-container">
+        <div className="tabs-container">
+          <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} /> 
+        </div>
+        <LogoutButton className="logout-button"/>    
+      </div>
+      
       <div>
         {eventsData.map((list, index) => (
           <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />

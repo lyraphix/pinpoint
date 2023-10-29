@@ -42,6 +42,16 @@ body {
   color: white;
 }
 
+.button-container {
+  display: inline-block;
+  align-items: center; /* This will vertically align the buttons in case they have different heights */
+  justify-content: space-between; /* This will add space between the buttons */
+  gap: 1rem; /* This will add a consistent gap between buttons; can adjust as needed */
+}
+
+.logout-button {
+  margin-left: auto;
+}
 
 .App-link {
   color: #61dafb;
