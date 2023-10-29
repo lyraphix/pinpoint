@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { storage } from './firebase'; // Import your Firebase storage instance
+import { storage } from './index'; // Import your Firebase storage instance
 import './ImageUploader.css'
 
 function ImageUploader() {
