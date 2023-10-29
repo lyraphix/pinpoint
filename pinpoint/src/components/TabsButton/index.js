@@ -20,7 +20,7 @@ export default function TabsButton({ onTabChange }) {
             <button onClick={handleMainButtonClick} className="main-tab-button">
                 {showTabs ? 'Close Filters' : 'Filters'}
             </button>
-            {showTabs && ['Requests', 'Events', 'Alerts'].map(tab => (
+            {showTabs && ['Campus Alerts', 'Campus Issues', 'Campus Events', 'Help Needed', 'Lost & Found'].map(tab => (
                 <button
                     key={tab}
                     className="sub-tab-button"
