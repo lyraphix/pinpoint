@@ -1,48 +1,99 @@
 .eventList {
-    margin-bottom: 20px;
-  }
-  
-  .tag {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .tag button {
-    margin-left: 10px;
-  }
-  
-  .eventsScrollable {
-    display: flex;
-    overflow-x: scroll;
-    gap: 20px;
-  }
-  
-  .eventCard {
-    min-width: 150px;
-    height: 200px;
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .imagePlaceholder {
-    width: 60%;
-    height: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed #ddd;
-  }
-  
-  /* Enlarge the card on hover */
-  .eventCard:hover {
-    background-color: #f7f7f7;
-    transform: scale(1.05); /* Enlarge the card by 5% */
-    z-index: 1; /* Ensure the enlarged card is above other elements */
-  }
-  
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tag button {
+  margin-left: 10px;
+}
+
+.eventsScrollable {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: auto;
+  gap: 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;  
+}
+.eventsScrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.eventCard {
+  position: relative;
+  min-width: 150px;
+  height: 160px;
+  border: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px 10px 10px 10px;
+  transition: transform 0.3s ease;
+  border-radius: 10px; /* Added rounded corners */
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px; /* Match the border-radius of the .eventCard */
+  overflow: hidden;
+  /* Gradient overlay */
+  background: linear-gradient(to top, rgba(0, 40, 0, 1) 0%, rgba(0, 50, 0, 0) 23%);
+
+  /* Enlarge the image on hover */
+  transition: transform 0.25s ease;
+}
+
+.eventCard:hover .imagePlaceholder {
+  transform: scale(1.07);
+}
+
+p {
+  z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  font-style: italic;
+  font-weight: bold;
+  bottom: -2px;
+  left: 10px;
+  max-width: calc(100% - 70px); /* Adjust this value based on your needs */
+}
+
+.upvoteCount {
+  z-index: 1;
+  align-self: flex-start; /* Make sure it's aligned to the left */
+  display: flex; /* Used for positioning the heart icon and number */
+  gap: 5px; /* Space between heart icon and number */
+  color: white; /* Font color */
+  font-family: "Roboto", sans-serif; /* For consistency */
+  position: absolute;
+  font-style: normal;
+  font-weight: bold;
+  bottom: 11px;
+  right: 10px;
+}
+
+.upvoteCount::before {
+  content: "\2665"; /* CSS content code for a heart */
+  font-size: 12px; /* Adjust as necessary */
+}
+
+.eventCard:hover {
+  z-index: 1;
+}

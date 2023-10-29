@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import mapboxgl from 'mapbox-gl'; 
 import Tabs from './components/Tabs';
 import Map from './components/Map';
+import Modal from './components/Modal';
+import PinDetails from './components/PinDetails';
 import EventList from './EventList';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
@@ -15,6 +17,15 @@ export default function App() {
     'Locations': true,
     'Details': true
   });
+  const [isModalOpen, setModalOpen] = useState(false);
+  const dummyPinsData = [
+    {
+      image: 'url_of_first_image',
+      title: 'Title of First Pin',
+      likes: 123
+    },
+    // ... other pins
+  ];
 
   const handleMapMove = (newLng, newLat, newZoom) => {
     setLng(newLng);
@@ -34,10 +45,10 @@ export default function App() {
     {
       tagName: 'Tag Name',
       events: [
-        { title: 'Event Title', upvotes: 1 },
+        { title: 'Event Titleeeeeeeeee', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },
-        { title: 'Event Title', upvotes: 1  }, 
-        { title: 'Event Title', upvotes: 1  },
+        { title: 'Event Tierrrrrrrtle', upvotes: 1000  }, 
+        { title: 'Event Title', upvotes: 100  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
         { title: 'Event Title', upvotes: 1  },
@@ -63,6 +74,13 @@ export default function App() {
   ];
   return (
     <div className="app-container">
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <div className="pins-container">
+          {dummyPinsData.map((pin, index) => (
+            <PinDetails key={index} {...pin} />
+          ))}
+        </div>
+      </Modal>
       <div className="sidebar">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
@@ -76,7 +94,7 @@ export default function App() {
       <Tabs tabsStatus={tabsStatus} onTabChange={toggleTab} />
       <div>
         {eventsData.map((list, index) => (
-          <EventList key={index} tagName={list.tagName} events={list.events} />
+          <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
         ))}
       </div>
     </div>

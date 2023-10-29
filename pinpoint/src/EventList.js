@@ -1,11 +1,11 @@
 import React from 'react';
 import './EventList.css';
 
-function EventList({ tagName, events }) {
+function EventList({ tagName, events, onEventClick }) {
     
   // Function to handle the click on an event
   const handleEventClick = (eventTitle) => {
-    alert(`You clicked on: ${eventTitle}`);
+    onEventClick();  // This will open the modal
   };
 
   return (
@@ -24,7 +24,7 @@ function EventList({ tagName, events }) {
                 <div className="imagePlaceholder">🖼️</div>
                 <p>{event.title}</p>
                 <div className="upvoteCount">
-                👍 {event.upvotes}
+                {event.upvotes}
                 </div>
             </button>
             ))}

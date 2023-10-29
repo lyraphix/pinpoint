@@ -38,6 +38,22 @@ const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsSt
     map.current.on('load', () => {
       toggleLayerVisibility(tabsStatus);
     });
+
+    map.current.on('click', (event) => {
+        const features = map.current.queryRenderedFeatures(event.point, {
+          layers: ['chicago-parks'], 
+        });
+        if (!features.length) {
+          return;
+        }
+        const feature = features[0];
+        new mapboxgl.Popup({ offset: [0, -15] })
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(
+            `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+          )
+          .addTo(map.current);
+      });
 // eslint-disable-next-line 
   }, []);
 
@@ -68,6 +84,6 @@ const Map = React.memo(({ initialLng, initialLat, initialZoom, onMapMove, tabsSt
     // Only re-render if tabsStatus values change
     return JSON.stringify(prevProps.tabsStatus) === JSON.stringify(nextProps.tabsStatus);
   }
-  );
+);
 
 export default Map;
