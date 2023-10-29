@@ -1,0 +1,39 @@
+/* Modal.css */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modalContent {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .modalCloseButton {
+    position: absolute;
+    top: 10px;  /* Adjust as needed */
+    right: 10px;  /* Adjust as needed */
+    background-color: transparent; /* Removes the default button background */
+    border: none;  /* Removes the default button border */
+    cursor: pointer; /* Indicates the button is clickable */
+    font-size: 20px;  /* Adjust as needed */
+    padding: 5px;  /* Adjust as needed for clickability */
+  }
+  
+  .modalCloseButton:hover {
+    background-color: #f0f0f0; /* Light gray background on hover */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
