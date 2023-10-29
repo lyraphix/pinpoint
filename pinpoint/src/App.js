@@ -11,6 +11,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from './components/Login/Login';
 import LogoutButton from './components/LogoutButton';
 import Tabs from "./components/Tabs"
+import EventList from "./EventList.js"
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -161,7 +162,11 @@ export default function App() {
       </div>
 
       {isNewPostModalOpen && <NewPostModal onClose={() => setNewPostModalOpen(false)} onSubmit={handleNewPost} />}
-
+      <div>
+        {eventsData.map((list, index) => (
+          <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
+        ))}
+      </div>
       <ImageUploader />
     </div>
   );
