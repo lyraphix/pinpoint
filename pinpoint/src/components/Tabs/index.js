@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Tabs.css";
 
 const Tabs = ({ tabsStatus, onTabChange }) => {
   const tabs = ['Events', 'Locations', 'Details'];

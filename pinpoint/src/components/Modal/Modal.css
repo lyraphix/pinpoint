@@ -36,6 +36,7 @@
     font-size: 20px;  /* Adjust as needed */
     padding: 5px;  /* Adjust as needed for clickability */
     background-color: #F9FAF3;
+    color: black;
   }
   
   .modalCloseButton:hover {
