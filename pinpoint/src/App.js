@@ -21,9 +21,11 @@ export default function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const dummyPinsData = [
     {
-      image: 'url_of_first_image',
-      title: 'Title of First Pin',
-      likes: 123
+      image: 'https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y',
+      title: 'Fireworks',
+      likes: 12,
+      class: 'EventImage',
+      id: 'eventimage1'
     },
     // ... other pins
   ];

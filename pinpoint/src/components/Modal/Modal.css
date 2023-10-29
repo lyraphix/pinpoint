@@ -13,11 +13,16 @@
   }
   
   .modalContent {
-    background-color: #fff;
+    border: 2px solid #333; /* Adjust the border width and color as needed */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Adjust the shadow properties as needed */
+    background-color: #F9FAF3;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 80%;
-    max-width: 500px;
+    max-width: 610px;
+    height: 70%;
+    font-family: 'Lato';
+
     position: relative;
   }
   
@@ -30,10 +35,11 @@
     cursor: pointer; /* Indicates the button is clickable */
     font-size: 20px;  /* Adjust as needed */
     padding: 5px;  /* Adjust as needed for clickability */
+    background-color: #F9FAF3;
   }
   
   .modalCloseButton:hover {
-    background-color: #f0f0f0; /* Light gray background on hover */
-    border-radius: 5px; /* Rounded corners */
+    color: #F9FAF3; /* Light gray background on hover */
+    background-color: black;
   }
   
