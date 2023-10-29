@@ -5,7 +5,7 @@ import Modal from './components/Modal';
 import PinDetails from './components/PinDetails';
 import ActionButton from './components/ActionButton.js';
 import NewPostModal from './components/NewPostModal/NewPostModal';
-
+import WelcomeModal from './components/WelcomeModal';
 import TabsButton from './components/TabsButton';
 /* No longer used import
 import ImageUploader from './ImageUploader';
@@ -46,29 +46,50 @@ export default function App() {
       setShowButton(false);
     }
   };
+
+  const locateUser = () => {
+    console.log('Locate user button clicked.');
+    if (mapFunctions.locateUser) {
+        mapFunctions.locateUser();
+    } else {
+        console.log('geolocate function is not available.');
+    }
+};
   
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+// Add a state variable to track if we've attempted to locate the user
+const [hasLocatedUser, setHasLocatedUser] = useState(false);
+const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+const delayedLocateUser = () => {
+  if (mapFunctions.locateUser && isAuthenticated && !hasLocatedUser) {
+    locateUser();
+    setHasLocatedUser(true);
+  }
+};
+
+useEffect(() => {
+  // This useEffect is solely for locating the user after component mounts
+  const timerId = setTimeout(delayedLocateUser, 700);
   
-    // Cleanup: remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // Cleanup: Clear the timeout if the component unmounts before the delay.
+  return () => {
+    clearTimeout(timerId);
+  };
+}, [isAuthenticated, mapFunctions]);
+
+useEffect(() => {
+  // This useEffect is for displaying the WelcomeModal when the user is authenticated
+  if (isAuthenticated && !showWelcomeModal) {
+    setShowWelcomeModal(true);
+  }
+}, [isAuthenticated]);
+
 
   if (!isAuthenticated) {
     return <LoginPage/>
   }
 
 
-  const locateUser = () => {
-      console.log('Locate user button clicked.');
-      if (mapFunctions.locateUser) {
-          mapFunctions.locateUser();
-      } else {
-          console.log('geolocate function is not available.');
-      }
-  };
+
 
   const dummyPinsData = [
     {
@@ -220,6 +241,7 @@ export default function App() {
         ))}
       </div>
       <LogoutButton className="logout-button"/>
+      {showWelcomeModal && <WelcomeModal onClose={() => setShowWelcomeModal(false)} />}
     </div>
   );
 }

@@ -20,7 +20,7 @@ function EventList({ tagName, events, onEventClick }) {
                 className="eventCard" 
                 onClick={() => handleEventClick(event.title)}
             >
-                <div className="imagePlaceholder">🖼️</div>
+                <div className="imagePlaceholder"></div>
                 <p>{event.title}</p>
                 <div className="upvoteCount">
                 {event.upvotes}

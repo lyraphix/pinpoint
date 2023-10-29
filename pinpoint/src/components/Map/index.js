@@ -51,6 +51,30 @@ const Map = ({ initialLng, initialLat, initialZoom, onMapMove, tabsStatus, setMa
     
             // This line triggers the geolocation, centering the map on the user's location
             geolocate.trigger();
+            map.current.on('click', handleMapClick);
+
+        }
+    };
+    const handleMapClick = (event) => {
+        // Query the map for features that were clicked on
+        const features = map.current.queryRenderedFeatures(event.point, {
+            // Specify the layers you want to check, these are your 'pins' layers
+            layers: ['chicago-lostnfound', 'chicago-events', 'chicago-parks'] // Add other layers if you have more
+        });
+        
+        // Check if a feature was clicked
+        if (features.length) {
+            const feature = features[0];
+    
+            // Create a popup and set its content to the feature's title and description
+            const popup = new mapboxgl.Popup({ offset: 25 })
+                .setLngLat(feature.geometry.coordinates)
+                .setHTML(`
+                <h3>${feature.properties.title}</h3>
+                <div style="color: #333; font-size: 14px; margin-top: 8px;">${feature.properties.description}</div>
+            `)
+            
+                .addTo(map.current);
         }
     };
     

@@ -5,8 +5,17 @@ export default function TabsButton({ onTabChange }) {
     const [showTabs, setShowTabs] = useState(false);
     const [activeTab, setActiveTab] = useState('Random');
 
+    // Mapping of tabs to their corresponding emojis
+    const tabEmojis = {
+        'Campus Alerts': '🚨',
+        'Campus Issues': '🔧',
+        'Campus Events': '🎉',
+        'Help Needed': '🆘',
+        'Lost & Found': '🔍'  // Using a magnifying glass for 'Lost & Found'
+    };
+
     const handleTabClick = (tab) => {
-        console.log(`Filter ${tab} clicked.`); // Added console log
+        console.log(`Filter ${tab} clicked.`);
         setActiveTab(tab);
         onTabChange(tab);
     };
@@ -18,15 +27,15 @@ export default function TabsButton({ onTabChange }) {
     return (
         <div className="tabs-button-container">
             <button onClick={handleMainButtonClick} className="main-tab-button">
-                {showTabs ? 'Close Filters' : 'Filters'}
+                {showTabs ? '⚙️' : '⚙️'}
             </button>
-            {showTabs && ['Campus Alerts', 'Campus Issues', 'Campus Events', 'Help Needed', 'Lost & Found'].map(tab => (
+            {showTabs && Object.keys(tabEmojis).map(tab => (
                 <button
                     key={tab}
                     className="sub-tab-button"
                     onClick={() => handleTabClick(tab)}
                 >
-                    {tab}
+                    {tabEmojis[tab]}
                 </button>
             ))}
         </div>
