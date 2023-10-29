@@ -1,18 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Map from './components/Map';
 import Modal from './components/Modal';
 import PinDetails from './components/PinDetails';
 import ActionButton from './components/ActionButton.js';
-import NewPostModal from './components/NewPostModal/NewPostModel';
+import NewPostModal from './components/NewPostModal/NewPostModal';
+
 import TabsButton from './components/TabsButton';
 import ImageUploader from './ImageUploader';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginPage from './components/Login/Login';
+import LocateUserButton from './components/LocateUserButton';
 import LogoutButton from './components/LogoutButton';
 import Tabs from "./components/Tabs"
 import EventList from "./EventList.js"
 import ScrollButton from './components/ScrollButton';
+
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -30,6 +33,8 @@ export default function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const geolocateControlRef = useRef(null); // Add this ref
+  const [mapFunctions, setMapFunctions] = useState({});
 
   const handleScroll = () => {
     // This will check if the user has scrolled more than 50 pixels
@@ -50,6 +55,17 @@ export default function App() {
   if (!isAuthenticated) {
     return <LoginPage/>
   }
+
+
+  const locateUser = () => {
+      console.log('Locate user button clicked.');
+      if (mapFunctions.locateUser) {
+          mapFunctions.locateUser();
+      } else {
+          console.log('geolocate function is not available.');
+      }
+  };
+
   const dummyPinsData = [
     {
       image: 'https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y',
@@ -66,6 +82,8 @@ export default function App() {
     setLat(newLat);
     setZoom(newZoom);
   };
+
+
 
   const handleTabChange = (tab) => {
     setTabsStatus(prevStatus => ({
@@ -164,13 +182,16 @@ export default function App() {
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
       <div className="mapContainer">
-        <Map 
+      <Map 
           initialLng={lng}
           initialLat={lat}
           initialZoom={zoom}
           onMapMove={handleMapMove}
           tabsStatus={tabsStatus}
-        />
+          setLat={setLat}
+          setLng={setLng}
+          setMapFunctions={setMapFunctions} 
+      />
         {showButton && <ScrollButton />}
         <div className="button-container">
           <div className="tabs-container">
@@ -182,12 +203,14 @@ export default function App() {
       </div>
 
       {isNewPostModalOpen && <NewPostModal onClose={() => setNewPostModalOpen(false)} onSubmit={handleNewPost} />}
+      <LocateUserButton onClick={locateUser} />
+
       <div>
         {eventsData.map((list, index) => (
           <EventList onEventClick={() => setModalOpen(true)} key={index} tagName={list.tagName} events={list.events} />
         ))}
       </div>
-      <ImageUploader />
+
     </div>
   );
 }
