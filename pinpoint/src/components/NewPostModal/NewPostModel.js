@@ -26,9 +26,11 @@ export default function NewPostModal({ onClose, onSubmit }) {
             </div>
             <input type="text" value={title} onChange={e => setTitle(e.target.value)} placeholder="Title" className="newpostmodal-input" />
             <select value={category} onChange={e => setCategory(e.target.value)} className="newpostmodal-select">
-                <option value="General">General</option>
-                <option value="Notices">Requests/Alerts</option>
-                <option value="Promotions">Promotions</option>
+                <option value="General">Campus Alerts</option>
+                <option value="Notices">Campus Issues</option>
+                <option value="Promotions">Campus Events</option>
+                <option value="Help">Help Needed</option>
+                <option value="Lost-and-Found">Lost & Found</option>
             </select>
             <button onClick={handleSubmit} className="newpostmodal-btn newpostmodal-submit-btn">Submit</button>
             <button onClick={onClose} className="newpostmodal-btn newpostmodal-close-btn">Close</button>

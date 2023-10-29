@@ -118,6 +118,15 @@ export default function App() {
 
       ]
     },
+    {
+      tagName: 'Lost & Found',
+      events: [
+        { title: 'Found AirPods in FGH atrium', upvotes: 6243 },
+        { title: 'Found a "Protein Zone" sign (Rand)', upvotes: 5 },
+
+
+      ]
+    },
     
   ];
   return (
