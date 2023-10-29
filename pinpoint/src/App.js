@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import Map from './components/Map';
 import Modal from './components/Modal';
@@ -12,6 +12,7 @@ import LoginPage from './components/Login/Login';
 import LogoutButton from './components/LogoutButton';
 import Tabs from "./components/Tabs"
 import EventList from "./EventList.js"
+import ScrollButton from './components/ScrollButton';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -19,6 +20,8 @@ export default function App() {
   const [lng, setLng] = useState(-86.8038);
   const [lat, setLat] = useState(36.1430);
   const [zoom, setZoom] = useState(15.11);
+  const [showButton, setShowButton] = useState(true);
+
   const [tabsStatus, setTabsStatus] = useState({
     'Events': true,
     'Locations': true,
@@ -27,6 +30,22 @@ export default function App() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  const handleScroll = () => {
+    // This will check if the user has scrolled more than 50 pixels
+    if (window.scrollY > 50) {
+      setShowButton(false);
+    }
+  };
+  
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+  
+    // Cleanup: remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (!isAuthenticated) {
     return <LoginPage/>
@@ -152,6 +171,7 @@ export default function App() {
           onMapMove={handleMapMove}
           tabsStatus={tabsStatus}
         />
+        {showButton && <ScrollButton />}
         <div className="button-container">
           <div className="tabs-container">
             <TabsButton onTabChange={handleTabChange} />
