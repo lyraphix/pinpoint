@@ -5,6 +5,8 @@ import Map from './components/Map';
 import Modal from './components/Modal';
 import PinDetails from './components/PinDetails';
 import EventList from './EventList';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginPage from './components/Login/Login';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
@@ -26,6 +28,12 @@ export default function App() {
     },
     // ... other pins
   ];
+
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+
+  if (!isAuthenticated) {
+    return <LoginPage/>
+  }
 
   const handleMapMove = (newLng, newLat, newZoom) => {
     setLng(newLng);
