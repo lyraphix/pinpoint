@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { storage } from './firebase'; // Import your Firebase storage instance
+import './ImageUploader.css'
 
 function ImageUploader() {
   const [image, setImage] = useState(null);
@@ -28,7 +29,7 @@ function ImageUploader() {
   };
 
   return (
-    <div>
+    <div className="choose-file">
       <input type="file" onChange={handleImageChange} />
     </div>
   );

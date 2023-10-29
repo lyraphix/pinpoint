@@ -44,7 +44,7 @@ export default function App() {
 
   const eventsData = [
     {
-      tagName: 'Tag Name',
+      tagName: 'Campus Alerts',
       events: [
         { title: 'Event Titleeeeeeeeee', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },
@@ -58,7 +58,7 @@ export default function App() {
       ]
     },
     {
-      tagName: 'Tag Name',
+      tagName: 'Campus Events',
       events: [
         { title: 'Event Title', upvotes: 1 },
         { title: 'Event Title', upvotes: 1  },

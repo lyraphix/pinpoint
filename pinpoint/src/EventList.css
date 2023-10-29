@@ -6,6 +6,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-size: calc(15px + 2vmin);
+  color: rgba(0, 40, 0, 1);
+  font-family: 'Lato';
+  padding: 5px;
 }
 
 .tag button {
