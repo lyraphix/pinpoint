@@ -7,13 +7,15 @@ import ActionButton from './components/ActionButton.js';
 import NewPostModal from './components/NewPostModal/NewPostModel';
 import TabsButton from './components/TabsButton';
 import ImageUploader from './ImageUploader';
+import { useAuth0 } from '@auth0/auth0-react';
+import LoginPage from './components/Login/Login';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibHlyYXBoaXgiLCJhIjoiY2xvYWZvM2lmMGk4YzJqcWMwODdnN3J5bCJ9.bEdAGzoZaFPApU_TPPMKCQ';
 
 export default function App() {
-  const [lng, setLng] = useState(-87.57);
-  const [lat, setLat] = useState(41.91);
-  const [zoom, setZoom] = useState(8.6);
+  const [lng, setLng] = useState(-86.8038);
+  const [lat, setLat] = useState(36.1430);
+  const [zoom, setZoom] = useState(15.11);
   const [tabsStatus, setTabsStatus] = useState({
     'Events': true,
     'Locations': true,
@@ -21,7 +23,11 @@ export default function App() {
   });
   const [isModalOpen, setModalOpen] = useState(false);
   const [isNewPostModalOpen, setNewPostModalOpen] = useState(false);
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
+  if (!isAuthenticated) {
+    return <LoginPage/>
+  }
   const dummyPinsData = [
     {
       image: 'https://www.sonomacounty.com/sites/default/files/styles/listing_event_slideshow/public/2020-06/IMG_5545.jpg?itok=5GJ_q5_y',
@@ -134,7 +140,9 @@ export default function App() {
           ))}
         </div>
       </Modal>
-
+      <div className="sidebar">
+        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      </div>
       <div className="mapContainer">
         <Map 
           initialLng={lng}
